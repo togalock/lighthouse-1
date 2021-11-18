@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lighthouse Navigator</title>
+
+  <link rel="stylesheet" href="https://unpkg.com/bulma">
+  <script src="https://kit.fontawesome.com/c771cb02ca.js" crossorigin="anonymous"></script>
+
+  <script src="https://unpkg.com/mustache"></script>
+  <link rel="stylesheet" href="helpers.css">
+  <link rel="stylesheet" href="index.css">
+</head>
+<body>
+
+  <div class="app has-background-warning-light" id="app">
+    
+    <div class="main" id="main">
+    </div>
+    
+    <div class="ui-overlay" id="ui-overlay">
+      <div class="is-block has-background-info m-2 p-1" id="from_row">
+        <p class="is-size-7">From</p>
+        <p class="is-size-6 font_j" id="from_label"></p>
+      </div>
+      
+      <div class="is-block has-background-primary-light m-2 p-1" id="to_row">
+        <p class="is-size-7">To</p>
+        <p class="is-size-5 font_j" id="to_label"></p>
+      </div>
+
+      <div class="is-block m-2" id="buttons_row">
+        <span class="is-size-7" id="buttons_text">Already assigned?</span>
+        <button class="button is-small is-primary font_m is-hidden" id="button_go">
+          <i class="fas fa-running"></i>
+          <span>Go!</span>
+        </button>
+        <button class="button is-small is-primary is-light font_m" id="button_attach">
+          <i class="fas fa-sign-in-alt"></i>
+          <span>Attach Session</span>
+        </button>
+      </div>
+
+      <div class="is-block m-0" id="input_menu">
+        <div class="is-block m-2" id="input_row">
+          <input class="input font_m" id="input_1" type="text" placeholder="Where are you now?">
+        </div>
+
+        <div class="is-block m-2" id="complete_row">
+          <div class="menu box p-1" id="complete_menu">
+            <ul class="menu-list" id="complete_list">
+            </ul>
+          </div>
+        </div>
+      </div>
+
+  </div>
+  
+  <script src="index.js"></script>
+</body>
+</html>

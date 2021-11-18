@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GA73 █ Lighthouse</title>
+
+  <link rel="stylesheet" href="https://unpkg.com/bulma">
+  <script src="https://kit.fontawesome.com/c771cb02ca.js" crossorigin="anonymous"></script>
+
+  <script src="https://unpkg.com/mustache"></script>
+  <link rel="stylesheet" href="helpers.css">
+  <link rel="stylesheet" href="index.css">
+</head>
+<body>
+
+  <div class="app" id="app">
+    
+    <div class="main has-background-primary-light" id="main">
+      <div class="is-block m-2 p-1" id="hint_row">
+        <p class="is-size-6">Your callsign and color:</p>
+      </div>
+
+      <div class="columns is-mobile m-2 p-1" id="callsign_color_row">
+        <div class="column is-two-thirds my-0">
+          <p class="is-size-4 font_j box" id="callsign">GA73</p>
+        </div>
+        <div class="column is-one-third">
+          <div class="has-background-primary box full_h"></div>
+        </div>
+      </div>
+
+      <div class="is-block">
+        
+      </div>
+
+      <div class="is-block m-2 p-1 has-text-centered" id="buttons_row">
+        <button class="button is-primary is-small font_m">
+          <i class="fas fa-door-open"></i>
+          <span>Finish</span>
+        </button>
+        <button class="button is-info is-small font_m">
+          <i class="far fa-question-circle"></i>
+          <span>Relocate</span>
+        </button>
+        <button class="button is-warning is-small font_m">
+          <i class="fas fa-external-link-square-alt"></i>
+          <span>New Target</span>
+        </button>
+      </div>
+
+      <div class="is-block m-0" id="input_menu">
+        <div class="is-block m-2" id="input_row">
+          <input class="input font_m is-full" id="input_1" type="text" placeholder="Where are you now?">
+        </div>
+
+        <div class="is-block m-2" id="complete_row">
+          <div class="menu box p-1" id="complete_menu">
+            <ul class="menu-list" id="complete_list">
+              <li><a>A1371</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="is-block m-2 p-1" id="instructions_row">
+        <div class="columns is-mobile m-2 p-1">
+          <div class="column is-two-thirds">
+            <p class="is-size-7">
+              Look for Lighthouse Modules along the way and check your next direction.
+            </p> 
+          </div>
+          <div class="column is-one-third">
+            <img class="image is-64x64" src="img/lhm.jfif">
+          </div>
+        </div>
+
+        <div class="columns is-mobile m-2 p-1">
+          <div class="column is-two-thirds">
+            <p class="is-size-7">
+              Modules might be in blind spots.
+              Look for reflector units pointing to the nearest module, too.
+            </p>
+          </div>
+          <div class="column is-one-third">
+            <img class="image is-64x64" src="img/lhir.jfif">
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="ui-overlay" id="ui-overlay">
+    </div>
+  </div>
+  
+  <script src="index.js"></script>
+</body>
+</html>
