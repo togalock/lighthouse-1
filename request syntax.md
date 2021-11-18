@@ -1,6 +1,6 @@
 Connecting node to server:
 ```json
-{"header": "SLAVE_CONNECT", "contetn": {"node_id": "YOUR_NODE_ID"} }
+{"header": "NODE_CONNECT", "content": {"node_id": "YOUR_NODE_ID"} }
 ```
 client request path from server:
 ```json
