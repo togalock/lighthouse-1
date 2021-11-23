@@ -1,4 +1,6 @@
-Websoket address: ws://pathserver.tomnotch.top:8765
+Websoket address: `ws://pathserver.tomnotch.top:8765`
+
+
 Connecting node to server:
 ```json
 {"header": "NODE_CONNECT", "content": {"node_id": "YOUR_NODE_ID"} }
