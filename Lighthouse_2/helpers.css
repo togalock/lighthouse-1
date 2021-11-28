@@ -1,0 +1,62 @@
+/* Structure Helpers */
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=M+PLUS+2:wght@400;500&display=swap');
+
+html {
+  height: 100%;
+  width: 100%;
+  background-color: black;
+}
+
+body {
+  position: relative;
+  height: 100%;
+  width: 100%;
+  max-width: 450px;
+  margin: auto;
+  overflow: auto;
+  background-color: white;
+}
+
+#app-overlay {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  pointer-events: none;
+}
+
+#app-overlay > * {
+  pointer-events: auto;
+}
+
+#app {
+  height: 100%;
+  width: 100%;
+  background-color: white;
+}
+
+.full_w {
+  width: 100%;
+}
+
+.full_h {
+  height: 100%;
+  min-height: 100%;
+}
+
+/* Font Helpers */
+
+.font_m {
+  font-family: 'M PLUS 2', 'Helvetica', 'Verdana', sans-serif;
+}
+
+.font_j {
+  font-family: 'JetBrains Mono', 'Courier New', monospace;
+}
+
+.font_4 {
+  font-weight: 400;
+}
+
+.font_5 {
+  font-weight: 500;
+}

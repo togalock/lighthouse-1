@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lighthouse Navigator</title>
+
+  <link rel="stylesheet" href="https://unpkg.com/bulma@0.9.3/css/bulma.css">
+  <link rel="stylesheet" href="https://raw.githubusercontent.com/kristofferandreasen/wickedCSS/master/dist/wickedcss.min.css">
+  <link rel="stylesheet" href="helpers.css">
+
+  <script src="https://kit.fontawesome.com/c771cb02ca.js" crossorigin="anonymous"></script>
+
+</head>
+
+<body style="max-width: 100%;">
+
+<div id="app-overlay">
+</div>
+
+<div id="app">
+  <div class="has-background-black full_w full_h font_m">
+    <div class="is-flex is-flex-direction-column p-2" id="routes" style="height: 85%;">
+    </div>
+
+    <div class="columns is-mobile m-0 has-background-primary" style="height: 15%;">
+      <div class="column is-two-thirds">
+        <p class="is-size-4" id="display_name">Display Name</p>
+        <p class="is-size-6 font_j" id="display_id">Node ID</p>
+      </div>
+      <div class="column is-one-third">
+        <span class="is-size-7" style="vertical-align: middle;">Start Navigating</span>
+        <img class="image is-inline-block is-64x64" style="vertical-align: middle;" id="client_qr">
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="helpers.js"></script>
+<script src="signage.js"></script>
+</body>
+</html>
