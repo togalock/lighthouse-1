@@ -1,7 +1,7 @@
-const SERVER_ADDR = "ws://localhost:5501";
+const SERVER_ADDR = "ws://pathserver.tomnotch.top:5501";
 let WS = undefined;
 
-const CLIENT_ADDR = "";
+const CLIENT_ADDR = "http://pathserver.tomnotch.top";
 
 const DISPLAY_ID = _GET()["nid"];
 const DISPLAY_NAME = _GET()["name"];
@@ -23,10 +23,11 @@ const CLIENT_QR_URL = `https://api.qrserver.com/v1/create-qr-code/?size=150x150&
 // Routes
 let ROUTES = {};
 
-function route_renders(symbol, cid, color) {
+function route_renders(symbol, symbol2, cid, color) {
   let renders = {
-    background_box: GEBC(`<div class="is-block has-background-${bulma_color(color)}"></div>`),
+    background_box: GEBC(`<div class="is-block has-background-${bulma_color(color)} has-text-centered"></div>`),
     symbol: undefined,
+    symbol2: undefined,
     cid: undefined,
 
     target_div: null,
@@ -34,8 +35,11 @@ function route_renders(symbol, cid, color) {
     unrender: undefined,
   };
 
-  renders.symbol = CO(renders.background_box, GEBC(`<i class="is-size-2 fas fa-${symbol}"></i>`));
-  renders.cid = CO(renders.background_box, GEBC(`<span class="is-size-2 mx-2 font_j">${cid}</span>`));
+  renders.symbol = CO(renders.background_box, GEBC(`<i class="is-size-1 fas fa-${symbol}"></i>`));
+  if (symbol2 != undefined) {
+    renders.symbol2 = CO(renders.background_box, GEBC(`<i class="is-size-1 fas fa-${symbol2}"></i>`));
+  }
+  renders.cid = CO(renders.background_box, GEBC(`<span class="is-size-1 mx-2 font_j">${cid}</span>`));
 
   renders.renderTo = function(target_div) {
     this.target_div = target_div;
@@ -58,8 +62,8 @@ function unrender_route(cid) {
   delete ROUTES[cid];
 }
 
-function render_route(symbol, cid, color, timeout = 30 * MINUTES) {
-  ROUTES[cid] = route_renders(symbol, cid, color);
+function render_route(symbol, symbol2, cid, color, timeout = 30 * MINUTES) {
+  ROUTES[cid] = route_renders(symbol, symbol2, cid, color);
   ROUTES[cid].renderTo(el["routes"]);
   setTimeout(() => unrender_route(cid), timeout);
 }
@@ -78,8 +82,11 @@ function on_ws_error() {
 }
 
 function on_ws_message(message) {
+
+  let data;
+
   try {
-    let data = JP(message.data);
+    data = JP(message.data);
   }
   catch (SyntaxError) {
     return false;
@@ -87,8 +94,9 @@ function on_ws_message(message) {
 
   if (data["to"] == DISPLAY_ID && data["action"] == "SET_ROUTE") {
     let symbol = data["request"]["symbol"];
+    let symbol2 = data["request"]["symbol2"];
     if (symbol != undefined) {
-      render_route(symbol, data["request"]["cid"], data["request"]["color"]);
+      render_route(symbol, symbol2, data["request"]["cid"], data["request"]["color"]);
     }
   }
 

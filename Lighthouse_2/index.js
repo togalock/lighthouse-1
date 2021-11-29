@@ -1,7 +1,9 @@
 let HANDLER = {
   globals: {
-    cid: random_string(3),
-    color: random_element(1, ["red", "yellow", "green", "purple"])[0],
+    cid: random_element(1, ["🐶", "🐱", "🐭", "🐹", "🐰", "🦊", "🐻", "🐼", 
+    "🐨", "🐯", "🦁", "🐮", "🐷", "🐸", "🐔", "🐧", "🙈", "🐦", "🐤", "🦆", 
+    "🦅", "🐺", "🐗", "🐴", "🦄", "🐝", "🦋", "🐌", "🐙", "🦐", "🦞", "🦀", "🐡", "🐟"])[0],
+    color: random_element(1, ["red", "yellow", "green", "purple", "blue", "gray"])[0],
     ws: null,
   },
 
@@ -43,9 +45,10 @@ HANDLER.push_action = async function(action) {
     let request = {
       "action": "TO_REQUEST_ROUTE",
       "from": HANDLER.globals.cid,
+      "color": HANDLER.globals.color,
       "request": {
-        "from_node": action["from_node"],
-        "to_node": action["to_node"],
+        "from_node": action["from_node"]["node"],
+        "to_node": action["to_node"]["node"],
       }
     }
     HANDLER.globals.ws.send(JC(request));

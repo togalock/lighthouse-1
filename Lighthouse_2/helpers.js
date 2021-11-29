@@ -73,7 +73,7 @@ function random_element(length, candidates) {
   let res = [];
 
   for (let i = 0; i < length; i++) {
-    res.push(candidates[Math.floor(Math.random()) * candidates.length]);
+    res.push(candidates[Math.floor(Math.random() * candidates.length)]);
   }
 
   return res;

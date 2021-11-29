@@ -106,6 +106,7 @@ SelectPointsScreen.attachers.on_target_cursor_change.attach = function() {
 
 SelectPointsScreen.listeners.on_target_change = function() {
   SelectPointsScreen.el["room_query"].value = '';
+  SelectPointsScreen.el["room_query_results"].innerHTML = '';
   
   if (SelectPointsScreen.globals.TARGETS["from_room"] != null) {
     SelectPointsScreen.el["from_label"].innerHTML = SelectPointsScreen.globals.TARGETS["from_room"]["name"];
@@ -141,8 +142,8 @@ SelectPointsScreen.listeners.on_query_result_click = function(room) {
   SelectPointsScreen.listeners.on_target_change();
 }
 
-SelectPointsScreen.listeners.on_room_query_input = function(inputEvent) {
-  let result_rooms = SelectPointsScreen.globals.query_rooms(inputEvent.data, SelectPointsScreen.globals.ROOMS);
+SelectPointsScreen.listeners.on_room_query_input = function() {
+  let result_rooms = SelectPointsScreen.globals.query_rooms(SelectPointsScreen.el["room_query"].value, SelectPointsScreen.globals.ROOMS);
   SelectPointsScreen.renderers.query_list_renders.rerender(result_rooms);
 }
 
@@ -190,9 +191,11 @@ SelectPointsScreen.renderers.query_list_renders.rerender = function(result_rooms
   this.target_div.innerHTML = '';
 
   for (let room of result_rooms) {
-    let anchor = GEBC(`<li><a>${room["name"]}</a></li>`);
-    anchor.addEventListener("click", () => SelectPointsScreen.listeners.on_query_result_click(room));
-    this.target_div.appendChild(anchor);
+    if (SelectPointsScreen.globals.TARGETS.cursor != "to_room" || room["no_to"] == undefined) {
+      let anchor = GEBC(`<li><a>${room["name"]}</a></li>`);
+      anchor.addEventListener("click", () => SelectPointsScreen.listeners.on_query_result_click(room));
+      this.target_div.appendChild(anchor); 
+    }
   }
 }
 
