@@ -18,14 +18,7 @@ let SelectPointsScreen = {
       "to_room": null,
     },
 
-    ROOMS: [
-      {"node": "R1", "name": "Room 1"},
-      {"node": "R2", "name": "Room 2"},
-      {"node": "R3", "name": "Room 3"},
-      {"node": "N1", "name": "Node 1"},
-      {"node": "N2", "name": "Node 2"},
-      {"node": "N3", "name": "Node 3"},
-    ],
+    ROOMS: undefined,
     
     query_rooms: undefined,
   },
@@ -36,6 +29,7 @@ let SelectPointsScreen = {
     on_query_result_click: undefined,
     on_room_query_input: undefined,
     on_button_go: undefined,
+    on_initial_point_set: undefined,
   },
 
   attachers: {
@@ -52,7 +46,8 @@ let SelectPointsScreen = {
     on_button_go: {
       attach: undefined,
       // detach: undefined,
-    }
+    },
+    on_initial_point_set: null,
   },
 
   renderers: {
@@ -169,6 +164,14 @@ SelectPointsScreen.attachers.on_button_go.attach = function() {
   SelectPointsScreen.el["go_button"].addEventListener("click", SelectPointsScreen.listeners.on_button_go);
 }
 
+SelectPointsScreen.listeners.on_initial_point_set = function(initial_nid) {
+  let target_room = null;
+  let target_rooms = SelectPointsScreen.globals.query_rooms(initial_nid, SelectPointsScreen.globals.ROOMS);
+  if (target_rooms.length > 0) {
+    SelectPointsScreen.listeners.on_query_result_click(target_rooms[0]);
+  }
+}
+
 // Renderers
 SelectPointsScreen.renderers.query_list_renders.renderTo = function(target_div) {
   this.target_div = target_div;
@@ -218,6 +221,11 @@ SelectPointsScreen.renders.renderTo = async function(app_target = null, overlay_
   SelectPointsScreen.attachers.on_room_query_input.attach();
   SelectPointsScreen.attachers.on_button_go.attach();
 
+  SelectPointsScreen.globals.ROOMS = await fetch("nodes.json").then(response => response.json());
+
+  if (_GET()["from"] != undefined) {
+    SelectPointsScreen.listeners.on_initial_point_set(_GET()["from"]);
+  }
 
   SelectPointsScreen.rendered = true;
   return SelectPointsScreen;
