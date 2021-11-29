@@ -21,14 +21,6 @@ const CLIENT_QR_URL = `https://api.qrserver.com/v1/create-qr-code/?size=150x150&
 
 
 // Routes
-let ROUTES_AVAILABLE = {
-
-};
-
-function resolve_route(next_node) {
-  return ROUTES_AVAILABLE[next_node];
-}
-
 let ROUTES = {};
 
 function route_renders(symbol, cid, color) {
@@ -94,7 +86,7 @@ function on_ws_message(message) {
   }
 
   if (data["to"] == DISPLAY_ID && data["action"] == "SET_ROUTE") {
-    let symbol = resolve_route(data["request"]["next_node"]);
+    let symbol = data["request"]["symbol"];
     if (symbol != undefined) {
       render_route(symbol, data["request"]["cid"], data["request"]["color"]);
     }
